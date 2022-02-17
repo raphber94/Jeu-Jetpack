@@ -21,11 +21,16 @@ running=True
 clock = pygame.time.Clock()
 fps=120
 
+#coordonnées du background
+bg_x=0
+bg_y=0
+
 #boucle tant que le jeu est lancé
 while running:
 
     #appliquer arriere plan
-    screen.blit(background,(0,0))
+    bg_x-=1
+    screen.blit(background,(bg_x,bg_y))
 
     #appliquer l'image du joueur
     screen.blit(game.player.image,game.player.rect)

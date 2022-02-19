@@ -62,7 +62,7 @@ fps=60
 
 #coordonnées du background
 bg_y=-485
-bg_fourth_plan_x=0
+bg_fifth_plan_x=0
 bg_thirdplan_x=0
 bg_secondplan_x=0
 bg_firstplan_x=0
@@ -74,21 +74,21 @@ while running:
     #appliquer arriere plan en le répétant à l'infini avec des vitesses différentes en fonction du premier plan, deuxième,...
 
     #Pour tous les éléments du quatrième plan
-    bg_fourth_plan_x -= 0.25
-    if bg_fourth_plan_x>-1333:
-        screen.blit(fond, (bg_fourth_plan_x, bg_y))
-        screen.blit(fond, (bg_fourth_plan_x+1333, bg_y))
+    bg_fifth_plan_x -= 0.25
+    if bg_fifth_plan_x>-1333:
+        screen.blit(fond, (bg_fifth_plan_x, bg_y))
+        screen.blit(fond, (bg_fifth_plan_x + 1333, bg_y))
 
-        screen.blit(brouillard2, (bg_fourth_plan_x, bg_y))
-        screen.blit(brouillard2, (bg_fourth_plan_x+1333, bg_y))
+        screen.blit(brouillard2, (bg_fifth_plan_x, bg_y))
+        screen.blit(brouillard2, (bg_fifth_plan_x + 1333, bg_y))
 
-        screen.blit(brouillard1, (bg_fourth_plan_x, bg_y))
-        screen.blit(brouillard1, (bg_fourth_plan_x+1333, bg_y))
+        screen.blit(brouillard1, (bg_fifth_plan_x, bg_y))
+        screen.blit(brouillard1, (bg_fifth_plan_x + 1333, bg_y))
     else:
-        bg_fourth_plan_x=0
-        screen.blit(fond,(bg_fourth_plan_x,bg_y))
-        screen.blit(brouillard2, (bg_fourth_plan_x, bg_y))
-        screen.blit(brouillard1,(bg_fourth_plan_x,bg_y))
+        bg_fifth_plan_x=0
+        screen.blit(fond, (bg_fifth_plan_x, bg_y))
+        screen.blit(brouillard2, (bg_fifth_plan_x, bg_y))
+        screen.blit(brouillard1, (bg_fifth_plan_x, bg_y))
 
     #Pour tous les éléments du troisième plan
     bg_thirdplan_x -= 0.5
@@ -151,9 +151,11 @@ while running:
     #appliquer l'image du joueur
     screen.blit(game.player.image,game.player.rect)
 
-    if game.pressed.get(pygame.K_SPACE)and game.player.rect.y>105:
+    print(game.player.rect.y)
+
+    if game.pressed.get(pygame.K_SPACE):
         game.player.move_up()
-    elif game.pressed.get(pygame.K_s) and game.player.rect.y<580:
+    elif game.pressed.get(pygame.K_s) and game.player.rect.y<509:
         game.player.move_down()
 
     #mise à jour de l'ecran

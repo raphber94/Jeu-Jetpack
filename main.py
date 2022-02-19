@@ -58,14 +58,18 @@ running=True
 
 #horloge
 clock = pygame.time.Clock()
-fps=60
+fps=120
 
 #coordonnées du background
 bg_y=-485
+bg_seventh_plan_x=0
+bg_sixth_plan_x=0
+bg_fifth_plan_x=0
 bg_fourth_plan_x=0
-bg_thirdplan_x=0
-bg_secondplan_x=0
+bg_third_plan_x=0
+bg_second_plan_x=0
 bg_firstplan_x=0
+bg_light_x=0
 
 
 #boucle tant que le jeu est lancé
@@ -73,87 +77,108 @@ while running:
 
     #appliquer arriere plan en le répétant à l'infini avec des vitesses différentes en fonction du premier plan, deuxième,...
 
-    #Pour tous les éléments du quatrième plan
-    bg_fourth_plan_x -= 0.25
+    #vitesses de chaque plan:
+    bg_seventh_plan_x -= 0.25
+    bg_sixth_plan_x -= 0.5
+    bg_fifth_plan_x -= 1
+    bg_fourth_plan_x-=1.3
+    bg_light_x-=1.5
+    bg_third_plan_x-=1.8
+    bg_second_plan_x-=2
+    bg_firstplan_x -= 2.2
+
+    #Pour tous les éléments du septième plan:
+    if bg_seventh_plan_x>-1333:
+        screen.blit(fond, (bg_seventh_plan_x, bg_y))
+        screen.blit(fond, (bg_seventh_plan_x + 1333, bg_y))
+
+        screen.blit(brouillard2, (bg_seventh_plan_x, bg_y))
+        screen.blit(brouillard2, (bg_seventh_plan_x + 1333, bg_y))
+
+        screen.blit(brouillard1, (bg_seventh_plan_x, bg_y))
+        screen.blit(brouillard1, (bg_seventh_plan_x + 1333, bg_y))
+    else:
+        bg_seventh_plan_x=0
+        screen.blit(fond, (bg_seventh_plan_x, bg_y))
+        screen.blit(brouillard2, (bg_seventh_plan_x, bg_y))
+        screen.blit(brouillard1, (bg_seventh_plan_x, bg_y))
+
+    #Pour tous les éléments du sixième plan:
+    if bg_sixth_plan_x>-1333:
+        screen.blit(ombres3, (bg_sixth_plan_x, bg_y))
+        screen.blit(ombres3, (bg_sixth_plan_x + 1333, bg_y))
+        screen.blit(lumiere2, (bg_sixth_plan_x, bg_y))
+        screen.blit(lumiere2, (bg_sixth_plan_x + 1333, bg_y))
+    else:
+        bg_sixth_plan_x=0
+        screen.blit(ombres3, (bg_sixth_plan_x, bg_y))
+        screen.blit(lumiere2, (bg_sixth_plan_x, bg_y))
+
+
+    # Pour tous les éléments du cinquième plan:
+    if bg_fifth_plan_x>-1333:
+        screen.blit(ombres2, (bg_fifth_plan_x, bg_y))
+        screen.blit(ombres2, (bg_fifth_plan_x + 1333, bg_y))
+    else:
+        bg_fifth_plan_x=0
+        screen.blit(ombres2, (bg_fifth_plan_x, bg_y))
+
+
+    #Pour tous les éléments du quatrième plan:
     if bg_fourth_plan_x>-1333:
-        screen.blit(fond, (bg_fourth_plan_x, bg_y))
-        screen.blit(fond, (bg_fourth_plan_x+1333, bg_y))
-
-        screen.blit(brouillard2, (bg_fourth_plan_x, bg_y))
-        screen.blit(brouillard2, (bg_fourth_plan_x+1333, bg_y))
-
-        screen.blit(brouillard1, (bg_fourth_plan_x, bg_y))
-        screen.blit(brouillard1, (bg_fourth_plan_x+1333, bg_y))
+        screen.blit(ombres1, (bg_fourth_plan_x, bg_y))
+        screen.blit(ombres1, (bg_fourth_plan_x + 1333, bg_y))
     else:
         bg_fourth_plan_x=0
-        screen.blit(fond,(bg_fourth_plan_x,bg_y))
-        screen.blit(brouillard2, (bg_fourth_plan_x, bg_y))
-        screen.blit(brouillard1,(bg_fourth_plan_x,bg_y))
+        screen.blit(ombres1, (bg_fourth_plan_x, bg_y))
 
-    #Pour tous les éléments du troisième plan
-    bg_thirdplan_x -= 0.5
-    if bg_thirdplan_x>-1333:
-        screen.blit(ombres3, (bg_thirdplan_x, bg_y))
-        screen.blit(ombres3, (bg_thirdplan_x+1333, bg_y))
+    #Plan avec lumière:
+    if bg_light_x>-1333:
+        screen.blit(lumiere1, (bg_light_x, bg_y))
+        screen.blit(lumiere1, (bg_light_x + 1333, bg_y))
+
     else:
-        bg_thirdplan_x=0
-        screen.blit(ombres3, (bg_thirdplan_x, bg_y))
+        bg_light_x=0
+        screen.blit(lumiere1, (bg_light_x, bg_y))
 
-    # Pour tous les éléments du deuxième plan:
-    bg_secondplan_x -= 1
-    if bg_secondplan_x>-1333:
-        screen.blit(ombres2, (bg_secondplan_x, bg_y))
-        screen.blit(ombres2, (bg_secondplan_x+1333, bg_y))
-
-        screen.blit(ombres1, (bg_secondplan_x, bg_y))
-        screen.blit(ombres1, (bg_secondplan_x+1333, bg_y))
+    #Pour tous les éléments du troisième plan:
+    if bg_third_plan_x>-1333:
+        screen.blit(tronc, (bg_third_plan_x, bg_y))
+        screen.blit(tronc, (bg_third_plan_x + 1333, bg_y))
     else:
-        bg_secondplan_x=0
-        screen.blit(ombres2, (bg_secondplan_x, bg_y))
-        screen.blit(ombres1, (bg_secondplan_x, bg_y))
+        bg_third_plan_x=0
+        screen.blit(tronc, (bg_third_plan_x, bg_y))
+
+    #Pour tous les éléments du second plan:
+    if bg_second_plan_x>-1333:
+        screen.blit(herbe, (bg_second_plan_x, bg_y))
+        screen.blit(herbe, (bg_second_plan_x + 1333, bg_y))
+        screen.blit(feuillages, (bg_second_plan_x, bg_y))
+        screen.blit(feuillages, (bg_second_plan_x + 1333, bg_y))
+    else:
+        bg_second_plan_x=0
+        screen.blit(herbe, (bg_second_plan_x, bg_y))
+        screen.blit(feuillages, (bg_second_plan_x, bg_y))
+
+    # appliquer l'image du joueur
+    screen.blit(game.player.image, game.player.rect)
+
 
     #Pour tous les éléments du premier plan:
-    bg_firstplan_x -= 2
     if bg_firstplan_x>-1333:
-        screen.blit(lumiere2, (bg_firstplan_x, bg_y))
-        screen.blit(lumiere2, (bg_firstplan_x+1333, bg_y))
-
-        screen.blit(lumiere1, (bg_firstplan_x, bg_y))
-        screen.blit(lumiere1, (bg_firstplan_x+1333, bg_y))
-
-        screen.blit(tronc, (bg_firstplan_x, bg_y))
-        screen.blit(tronc, (bg_firstplan_x+1333, bg_y))
-
-        screen.blit(herbe, (bg_firstplan_x, bg_y))
-        screen.blit(herbe, (bg_firstplan_x+1333, bg_y))
-
-        screen.blit(feuillages, (bg_firstplan_x, bg_y))
-        screen.blit(feuillages, (bg_firstplan_x+1333, bg_y))
-
         screen.blit(terre, (bg_firstplan_x, bg_y))
         screen.blit(terre, (bg_firstplan_x+1333, bg_y))
     else:
         bg_firstplan_x=0
-        screen.blit(lumiere2, (bg_firstplan_x, bg_y))
-        screen.blit(lumiere1, (bg_firstplan_x, bg_y))
-        screen.blit(tronc, (bg_firstplan_x, bg_y))
         screen.blit(herbe, (bg_firstplan_x, bg_y))
-        screen.blit(feuillages, (bg_firstplan_x, bg_y))
         screen.blit(terre, (bg_firstplan_x, bg_y))
 
 
 
 
-
-
-
-
-    #appliquer l'image du joueur
-    screen.blit(game.player.image,game.player.rect)
-
-    if game.pressed.get(pygame.K_SPACE)and game.player.rect.y>105:
+    if game.pressed.get(pygame.K_SPACE) and game.player.rect.y>2:
         game.player.move_up()
-    elif game.pressed.get(pygame.K_s) and game.player.rect.y<580:
+    elif game.pressed.get(pygame.K_s) and game.player.rect.y<509:
         game.player.move_down()
 
     #mise à jour de l'ecran

@@ -60,6 +60,11 @@ bg_second_plan_x=0
 bg_firstplan_x=0
 bg_light_x=0
 
+#temps de descente et temps de montée
+time_up=0
+time_down=0
+
+up=False
 
 #boucle tant que le jeu est lancé
 while running:
@@ -147,18 +152,36 @@ while running:
         bg_firstplan_x=0
         screen.blit(plan1, (bg_firstplan_x, bg_y))
 
+    #si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0
+    if up==False and game.pressed.get(pygame.K_SPACE):
+     time_up=0
 
-
+    if up==True and game.pressed.get(pygame.K_SPACE)==False:
+        time_down=0
 
     if game.pressed.get(pygame.K_SPACE) and game.player.rect.y>2:
-        game.player.move_up()
-    elif game.pressed.get(pygame.K_s) and game.player.rect.y<509:
-        game.player.move_down()
+        up=True
+        time_up+=1
+        game.player.move_up(time_up,time_down)
+    else:
+        up=False
+        if game.player.rect.y<514:
+            time_down+=2
+            game.player.fall(time_down,time_up)
+
+    #avec la chute libre, le joueur sort parfois de l'écran donc on le remet dans le cadre
+    if game.player.rect.y > 514:
+        game.player.rect.y=514
+    elif game.player.rect.y<2:
+        game.player.rect.y=2
+        time_up=60
+
+
 
     #mise à jour de l'ecran
     pygame.display.flip()
 
-
+    print(time_down)
     clock.tick(fps)
 
     #si le joueur ferme cette fenêtre

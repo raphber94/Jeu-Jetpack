@@ -174,7 +174,7 @@ while running:
         game.player.rect.y=514
     elif game.player.rect.y<2:
         game.player.rect.y=2
-        time_up=60
+        time_up=0
 
 
 

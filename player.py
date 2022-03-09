@@ -12,7 +12,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.y= 514
 
     def move_up(self,time_up,time_down):
-        self.rect.y-=(self.velocity_y/2)*(time_up/60)**2+(5*time_down/120)
+        self.rect.y-=(self.velocity_y/2)*(time_up/60)**2+(5*time_down/360)
+        if self.rect.y<2:
+            self.rect.y=2
 
     def move_down(self):
         self.rect.y+=self.velocity_y

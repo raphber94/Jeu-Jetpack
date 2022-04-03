@@ -1,5 +1,6 @@
 import pygame
 from game import Game
+from obstacles import *
 
 pygame.init()
 
@@ -36,9 +37,10 @@ plan7=pygame.transform.scale(plan7,(resize_x,resize_y))
 planlight=pygame.image.load('assets/background/planlight.png').convert_alpha()
 planlight=pygame.transform.scale(planlight,(resize_x,resize_y))
 
-
-
-
+#obstacles
+all_fires=pygame.sprite.Group()
+fire=Fire1(1200,456)
+all_fires.add(fire)
 
 #charger le jeu
 game=Game()
@@ -146,8 +148,6 @@ while running:
     # appliquer l'image du joueur
     screen.blit(game.player.image, game.player.rect)
 
-
-
     #Pour tous les éléments du premier plan:
     if bg_firstplan_x>-1333:
         screen.blit(plan1, (bg_firstplan_x, bg_y))
@@ -156,6 +156,11 @@ while running:
         bg_firstplan_x=0
         screen.blit(plan1, (bg_firstplan_x, bg_y))
 
+    #On affiche les obstacles
+    all_fires.draw(screen)
+    for fire in all_fires:
+        fire.move()
+
     #si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0
     if up==False and game.pressed.get(pygame.K_SPACE):
      time_up=0
@@ -163,7 +168,7 @@ while running:
     if up==True and game.pressed.get(pygame.K_SPACE)==False:
         time_down=0
 
-    if game.pressed.get(pygame.K_SPACE) and game.player.rect.y>2:
+    if game.pressed.get(pygame.K_SPACE):
         up=True
         time_up+=1
         v0_down=game.player.move_up(time_up,v0_up)
@@ -176,9 +181,6 @@ while running:
     #avec la chute libre, le joueur sort parfois de l'écran donc on le remet dans le cadre
     if game.player.rect.y > 514:
         game.player.rect.y=514
-    elif game.player.rect.y<2:
-        game.player.rect.y=2
-        time_up=0
 
 
     #mise à jour de l'ecran

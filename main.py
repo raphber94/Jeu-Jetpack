@@ -63,8 +63,11 @@ bg_light_x=0
 #temps de descente et temps de montée
 time_up=0
 time_down=0
+v0_up=0
+v0_down=0
 
 up=False
+
 
 #boucle tant que le jeu est lancé
 while running:
@@ -144,6 +147,7 @@ while running:
     screen.blit(game.player.image, game.player.rect)
 
 
+
     #Pour tous les éléments du premier plan:
     if bg_firstplan_x>-1333:
         screen.blit(plan1, (bg_firstplan_x, bg_y))
@@ -162,12 +166,12 @@ while running:
     if game.pressed.get(pygame.K_SPACE) and game.player.rect.y>2:
         up=True
         time_up+=1
-        game.player.move_up(time_up,time_down)
+        v0_down=game.player.move_up(time_up,v0_up)
     else:
         up=False
         if game.player.rect.y<514:
-            time_down+=2
-            game.player.fall(time_down,time_up)
+            time_down+=1
+            v0_up=game.player.fall(time_down,v0_down)
 
     #avec la chute libre, le joueur sort parfois de l'écran donc on le remet dans le cadre
     if game.player.rect.y > 514:
@@ -177,11 +181,8 @@ while running:
         time_up=0
 
 
-
     #mise à jour de l'ecran
     pygame.display.flip()
-
-    print(time_down)
     clock.tick(fps)
 
     #si le joueur ferme cette fenêtre

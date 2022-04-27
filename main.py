@@ -43,7 +43,7 @@ game=Game()
 running=True
 
 #obstacles
-fire=Fire1(game,1200,456)
+fire=Fire1(game,1200,456,"saw")
 game.all_fires.add(fire)
 
 #horloge

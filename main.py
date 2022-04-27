@@ -37,15 +37,14 @@ plan7=pygame.transform.scale(plan7,(resize_x,resize_y))
 planlight=pygame.image.load('assets/background/planlight.png').convert_alpha()
 planlight=pygame.transform.scale(planlight,(resize_x,resize_y))
 
-#obstacles
-all_fires=pygame.sprite.Group()
-fire=Fire1(1200,456)
-all_fires.add(fire)
-
 #charger le jeu
 game=Game()
 
 running=True
+
+#obstacles
+fire=Fire1(game,1200,456)
+game.all_fires.add(fire)
 
 #horloge
 clock = pygame.time.Clock()
@@ -157,8 +156,8 @@ while running:
         screen.blit(plan1, (bg_firstplan_x, bg_y))
 
     #On affiche les obstacles
-    all_fires.draw(screen)
-    for fire in all_fires:
+    game.all_fires.draw(screen)
+    for fire in game. all_fires:
         fire.move()
 
     #si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0

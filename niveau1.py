@@ -64,6 +64,10 @@ def niveau1():
     laser22 = obstacle(game, 4500, 350, "laser", 90)
     laser23 = obstacle(game, 4700, 125, "laser", 90)
     laser24 = obstacle(game, 4700, 350, "laser", 90)
+    laser25 = obstacle(game, 5050, 87, "laser", -45)
+    laser26 = obstacle(game, 5050, 370 - 87, "laser", 45)
+    laser27 = obstacle(game, 5050+175, 87, "laser", 45)
+    laser28 = obstacle(game, 5050+175, 370 - 87, "laser", -45)
     
     game.all_obstacles.add(laser)
     game.all_obstacles.add(laser2)
@@ -89,6 +93,10 @@ def niveau1():
     game.all_obstacles.add(laser22)
     game.all_obstacles.add(laser23)
     game.all_obstacles.add(laser24)
+    game.all_obstacles.add(laser25)
+    game.all_obstacles.add(laser26)
+    game.all_obstacles.add(laser27)
+    game.all_obstacles.add(laser28)
 
     # horloge
     clock = pygame.time.Clock()
@@ -196,10 +204,11 @@ def niveau1():
             bg_firstplan_x = 0
             screen.blit(plan1, (bg_firstplan_x, bg_y))
 
-        # On affiche les obstacles
-        game.all_obstacles.draw(screen)
-        for fire in game.all_obstacles:
-            fire.move()
+        # On affiche les obstacles et on les fait avancer
+        for obst in game.all_obstacles:
+            if obst.rect.x<=1100 and obst.rect.x>=-200:
+                screen.blit(obst.image,obst.rect)
+            obst.move()
 
         # si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0
         if up == False and game.pressed.get(pygame.K_SPACE):

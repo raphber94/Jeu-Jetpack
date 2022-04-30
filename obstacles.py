@@ -19,5 +19,5 @@ class obstacle(pygame.sprite.Sprite):
 
     def move(self):
         if not self.game.check_collision(self,self.game.all_players):
-            if self.game.pressed.get(pygame.K_p) == False:
+            #if self.game.pressed.get(pygame.K_p) == False:
                 self.rect.x-=self.velocity

@@ -136,6 +136,12 @@ def niveau1():
     # croix 12
     laser75 = obstacle(game, 10025, 370, "laser", -45)
     laser76 = obstacle(game, 10025, 370, "laser", 45)
+    #croiw 13
+    laser77 = obstacle(game, 10125, 120, "laser", -45)
+    laser78 = obstacle(game, 10125, 120, "laser", 45)
+    # lasers arrivée
+    laser79 = obstacle(game, 10500, 0, "laser", 0)
+    laser80 = obstacle(game, 10500, 370, "laser", 0)
 
     game.all_obstacles.add(laser)
     game.all_obstacles.add(laser2)
@@ -213,6 +219,10 @@ def niveau1():
     game.all_obstacles.add(laser74)
     game.all_obstacles.add(laser75)
     game.all_obstacles.add(laser76)
+    game.all_obstacles.add(laser77)
+    game.all_obstacles.add(laser78)
+    game.all_obstacles.add(laser79)
+    game.all_obstacles.add(laser80)
 
     # horloge
     clock = pygame.time.Clock()

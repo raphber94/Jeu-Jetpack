@@ -140,8 +140,8 @@ def niveau1():
     laser77 = obstacle(game, 10125, 120, "laser", -45)
     laser78 = obstacle(game, 10125, 120, "laser", 45)
     # lasers arrivée
-    laser79 = obstacle(game, 10500, 0, "laser", 0)
-    laser80 = obstacle(game, 10500, 370, "laser", 0)
+    laser79 = obstacle(game, 10600, 0, "laser", 0)
+    laser80 = obstacle(game, 10600, 370, "laser", 0)
 
     game.all_obstacles.add(laser)
     game.all_obstacles.add(laser2)
@@ -245,6 +245,9 @@ def niveau1():
     v0_up = 0
     v0_down = 0
 
+    #arrivée
+    fin=arrivee(game, 10600, 120)
+
     up = False
 
     # boucle tant que le jeu est lancé
@@ -263,7 +266,6 @@ def niveau1():
         else:
             up = False
             if game.player.rect.y < 514:
-                print("sheshhh")
                 time_down += 1
                 v0_up = game.player.fall(time_down, v0_down)
 
@@ -358,6 +360,8 @@ def niveau1():
                 screen.blit(obst.image,obst.rect)
             obst.move()
 
+        fin.move()
+        screen.blit(fin.image,(fin.rect.x,fin.rect.y))
         # mise à jour de l'ecran
         pygame.display.flip()
         clock.tick(fps)

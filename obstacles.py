@@ -21,3 +21,16 @@ class obstacle(pygame.sprite.Sprite):
         if not self.game.check_collision(self,self.game.all_players):
             #if self.game.pressed.get(pygame.K_p) == False:
                 self.rect.x-=self.velocity
+
+class arrivee(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        super().__init__()
+        self.game=game
+        self.velocity=4
+        self.image=pygame.image.load('assets/arrivee/flag1.png')
+        self.rect=self.image.get_rect()
+        self.rect.x=x
+        self.rect.y=y
+
+    def move(self):
+        self.rect.x-=self.velocity

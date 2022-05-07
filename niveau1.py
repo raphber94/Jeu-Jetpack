@@ -2,6 +2,9 @@ import pygame
 from game import Game
 from obstacles import *
 from niveau1 import *
+import time
+
+
 def niveau1():
     # générer la fenetre de notre jeu
     pygame.display.set_caption("Jetpy")
@@ -52,7 +55,7 @@ def niveau1():
     laser10 = obstacle(game, 3200, 370, "laser", -45)
     laser11 = obstacle(game, 3450, 0, "laser", -45)
     laser12 = obstacle(game, 3450, 370, "laser", 45)
-    #losange 1
+    # losange 1
     laser13 = obstacle(game, 3650, 87, "laser", -45)
     laser14 = obstacle(game, 3650, 370 - 87, "laser", 45)
     laser15 = obstacle(game, 3650 + 175, 87, "laser", 45)
@@ -66,31 +69,31 @@ def niveau1():
     laser22 = obstacle(game, 4500, 350, "laser", 90)
     laser23 = obstacle(game, 4700, 125, "laser", 90)
     laser24 = obstacle(game, 4700, 350, "laser", 90)
-    #losange 2
+    # losange 2
     laser25 = obstacle(game, 5050, 87, "laser", -45)
     laser26 = obstacle(game, 5050, 370 - 87, "laser", 45)
-    laser27 = obstacle(game, 5050+175, 87, "laser", 45)
-    laser28 = obstacle(game, 5050+175, 370 - 87, "laser", -45)
-    #pic vers le haut
+    laser27 = obstacle(game, 5050 + 175, 87, "laser", 45)
+    laser28 = obstacle(game, 5050 + 175, 370 - 87, "laser", -45)
+    # pic vers le haut
     laser29 = obstacle(game, 5400, 385, "laser", -45)
     laser30 = obstacle(game, 5542, 243, "laser", -45)
     laser31 = obstacle(game, 5684, 101, "laser", -45)
     laser32 = obstacle(game, 5884, 101, "laser", 45)
     laser33 = obstacle(game, 6026, 243, "laser", 45)
     laser34 = obstacle(game, 6168, 385, "laser", 45)
-    #pic vers le bas
+    # pic vers le bas
     laser35 = obstacle(game, 6184, 0, "laser", 45)
     laser36 = obstacle(game, 6326, 142, "laser", 45)
     laser37 = obstacle(game, 6468, 284, "laser", 45)
     laser38 = obstacle(game, 6668, 284, "laser", -45)
     laser39 = obstacle(game, 6810, 142, "laser", -45)
     laser40 = obstacle(game, 6952, 0, "laser", -45)
-    #petit pic vers le haut
+    # petit pic vers le haut
     laser41 = obstacle(game, 6893, 385, "laser", -45)
     laser42 = obstacle(game, 7035, 243, "laser", -45)
     laser43 = obstacle(game, 7235, 243, "laser", 45)
     laser44 = obstacle(game, 7377, 385, "laser", 45)
-    #petit pic vers le bas
+    # petit pic vers le bas
     laser45 = obstacle(game, 7300, 0, "laser", 45)
     laser46 = obstacle(game, 7442, 142, "laser", 45)
     laser47 = obstacle(game, 7642, 142, "laser", -45)
@@ -100,34 +103,34 @@ def niveau1():
     laser50 = obstacle(game, 7842, 243, "laser", -45)
     laser51 = obstacle(game, 8042, 243, "laser", 45)
     laser52 = obstacle(game, 8184, 385, "laser", 45)
-    #croix 1
+    # croix 1
     laser53 = obstacle(game, 8250, 0, "laser", 45)
     laser54 = obstacle(game, 8250, 0, "laser", -45)
-    #croix 2
+    # croix 2
     laser55 = obstacle(game, 8450, 370, "laser", 45)
-    laser56 = obstacle(game, 8450, 370,"laser", -45)
-    #croix 3
+    laser56 = obstacle(game, 8450, 370, "laser", -45)
+    # croix 3
     laser57 = obstacle(game, 8650, 150, "laser", 45)
     laser58 = obstacle(game, 8650, 150, "laser", -45)
-    #coix 4
+    # coix 4
     laser59 = obstacle(game, 8920, 0, "laser", 45)
     laser60 = obstacle(game, 8920, 0, "laser", -45)
-    #croix 5
+    # croix 5
     laser61 = obstacle(game, 9000, 370, "laser", -45)
     laser62 = obstacle(game, 9000, 370, "laser", 45)
-    #croix 6
+    # croix 6
     laser63 = obstacle(game, 9200, 75, "laser", 45)
     laser64 = obstacle(game, 9200, 75, "laser", -45)
-    #croix 7
+    # croix 7
     laser65 = obstacle(game, 9400, 300, "laser", -45)
     laser66 = obstacle(game, 9400, 300, "laser", 45)
-    #croix 8
+    # croix 8
     laser67 = obstacle(game, 9550, 0, "laser", 45)
     laser68 = obstacle(game, 9550, 0, "laser", -45)
-    #croix 9
-    laser69= obstacle(game, 9650, 370, "laser", 45)
+    # croix 9
+    laser69 = obstacle(game, 9650, 370, "laser", 45)
     laser70 = obstacle(game, 9650, 370, "laser", -45)
-    #croix 10
+    # croix 10
     laser71 = obstacle(game, 9850, 150, "laser", -45)
     laser72 = obstacle(game, 9850, 150, "laser", 45)
     # croix 11
@@ -136,7 +139,7 @@ def niveau1():
     # croix 12
     laser75 = obstacle(game, 10025, 370, "laser", -45)
     laser76 = obstacle(game, 10025, 370, "laser", 45)
-    #croiw 13
+    # croiw 13
     laser77 = obstacle(game, 10125, 120, "laser", -45)
     laser78 = obstacle(game, 10125, 120, "laser", 45)
     # lasers arrivée
@@ -245,13 +248,46 @@ def niveau1():
     v0_up = 0
     v0_down = 0
 
-    #arrivée
-    fin=arrivee(game, 10600, 120)
+    # arrivée
+    fin = arrivee(game, 10625, 200)
 
     up = False
 
     # boucle tant que le jeu est lancé
     while running:
+        # Pas basé sur le temps -> update tous les 0.5s
+        # On récupère le temps actuel en s ===> "time.time()"
+        # On le convertit en string ===> "str((time.time()))" -> ressemble à ABCDEF.abcde, a correspond au dixième de seconde
+        # On sépare la string en un tableau de 2 éléments [0] = entier et [1] = décimal ===> "str((time.time())).split(".")"
+        # On prend les décimals ===> "str((time.time())).split(".")[1]"
+        # Ainsi, millis[0] va prendre toutes les valeurs de 0 à 9 toutes les 0.1s
+        # millis[1] va prendre toutes les valeurs de 0 à 9 toutes les 0.01s
+        # Et ainsi de suite
+        millis = str((time.time())).split(".")[1]
+        # print(millis)
+        # Animation obstacle
+        for k in game.all_obstacles:
+            k.image = pygame.image.load('assets/obstacles/laser/' + millis[0] + '.png')
+            k.image = pygame.transform.rotate(k.image, k.rotation)
+
+        # Animation drapeau arrivée
+        if (not int(millis[0]) % 2):
+            fin.image = pygame.image.load('assets/arrivee/' + millis[0] + '.png').convert_alpha()
+        # Animation player
+        # Au sol
+        if (game.player.rect.y == 514):
+            if (0 <= int(millis[0]) * 10 + int(millis[1]) < 25 or 50 <= int(millis[0]) * 10 + int(millis[1]) < 75):
+                game.player.image = pygame.image.load('assets/walk1.bmp').convert_alpha()
+            else:
+                game.player.image = pygame.image.load('assets/walk2.bmp').convert_alpha()
+        # En vol
+        else:
+            # Si space pressed
+            if (game.pressed.get(pygame.K_SPACE)):
+                game.player.image = pygame.image.load('assets/flying.bmp').convert_alpha()
+            else:
+                game.player.image = pygame.image.load('assets/flying2.bmp').convert_alpha()
+
         # si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0
         if up == False and game.pressed.get(pygame.K_SPACE):
             time_up = 0
@@ -276,7 +312,7 @@ def niveau1():
         # appliquer arriere plan en le répétant à l'infini avec des vitesses différentes en fonction du premier plan, deuxième,...
         # Pour tous les éléments du septième plan:
 
-        #vitesses de chaque plan
+        # vitesses de chaque plan
         bg_seventh_plan_x -= 0.25 * 2
         bg_sixth_plan_x -= 0.5 * 2
         bg_fifth_plan_x -= 1 * 2
@@ -285,7 +321,6 @@ def niveau1():
         bg_third_plan_x -= 1.8 * 2
         bg_second_plan_x -= 2 * 2
         bg_firstplan_x -= 2.2 * 2
-
 
         if bg_seventh_plan_x > -1333:
             screen.blit(plan7, (bg_seventh_plan_x, bg_y))
@@ -356,15 +391,18 @@ def niveau1():
 
         # On affiche les obstacles et on les fait avancer
         for obst in game.all_obstacles:
-            if obst.rect.x<=1100 and obst.rect.x>=-200:
-                screen.blit(obst.image,obst.rect)
+            if obst.rect.x <= 1100 and obst.rect.x >= -200:
+                screen.blit(obst.image, obst.rect)
             obst.move()
 
         fin.move()
-        screen.blit(fin.image,(fin.rect.x,fin.rect.y))
+        screen.blit(fin.image, (fin.rect.x, fin.rect.y))
         # mise à jour de l'ecran
         pygame.display.flip()
         clock.tick(fps)
+
+        if game.check_collision(game.player, game.all_obstacles):
+            return False
 
         # si le joueur ferme cette fenêtre
         for event in pygame.event.get():

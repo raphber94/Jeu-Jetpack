@@ -99,6 +99,8 @@ while running:
     # Lancement des différents niveaux
     if Lvl_1:
         niveau1()
+        Lvl_1=False
+
     if Lvl_2:
         screen.blit(background_lvl_2, (0, 0))
     if Lvl_3:

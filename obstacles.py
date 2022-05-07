@@ -5,6 +5,7 @@ class obstacle(pygame.sprite.Sprite):
     def __init__(self,game,x,y,type,rotation):
         super().__init__()
         self.game=game
+        self.rotation = rotation
         if type=="fire":
             self.image=pygame.image.load('assets/obstacles/firetrap1.png')
         elif type=="saw":
@@ -18,7 +19,7 @@ class obstacle(pygame.sprite.Sprite):
         self.velocity=4
 
     def move(self):
-        if not self.game.check_collision(self,self.game.all_players):
+        #if not self.game.check_collision(self,self.game.all_players):
             #if self.game.pressed.get(pygame.K_p) == False:
                 self.rect.x-=self.velocity
 
@@ -27,7 +28,7 @@ class arrivee(pygame.sprite.Sprite):
         super().__init__()
         self.game=game
         self.velocity=4
-        self.image=pygame.image.load('assets/arrivee/flag1.png')
+        self.image=pygame.image.load('assets/arrivee/0.png')
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y

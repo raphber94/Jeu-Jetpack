@@ -249,7 +249,8 @@ def niveau1():
     v0_down = 0
 
     # arrivée
-    fin = arrivee(game, 10625, 200)
+    fin = arrivee(game, 10700, 200)
+    game.all_finish.add(fin)
 
     up = False
 
@@ -401,8 +402,11 @@ def niveau1():
         pygame.display.flip()
         clock.tick(fps)
 
-        if game.check_collision(game.player, game.all_obstacles):
-            return False
+        #if game.check_collision(game.player, game.all_obstacles):
+            #return False
+
+        if game.check_collision(game.player, game.all_finish):
+            return True
 
         # si le joueur ferme cette fenêtre
         for event in pygame.event.get():

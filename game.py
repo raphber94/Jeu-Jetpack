@@ -11,6 +11,7 @@ class Game:
         self.all_players.add(self.player)
         self.pressed={}
         self.all_obstacles = pygame.sprite.Group()
+        self.all_finish= pygame.sprite.Group()
 
     def check_collision(self,sprite,group):
         return pygame.sprite.spritecollide(sprite,group,False,pygame.sprite.collide_mask)

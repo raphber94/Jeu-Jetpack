@@ -3,12 +3,17 @@ from game import Game
 from obstacles import *
 from niveau1 import *
 import time
+from pygame.locals import *
+#import psyco
+#psyco.full()
 
 
 def niveau1():
     # générer la fenetre de notre jeu
     pygame.display.set_caption("Jetpy")
-    screen = pygame.display.set_mode((1100, 600))
+    flags = FULLSCREEN | DOUBLEBUF
+    screen = pygame.display.set_mode((1100, 600), flags)
+    screen.set_alpha(None)
 
     resize_x = 1333
     resize_y = 1140
@@ -268,7 +273,7 @@ def niveau1():
         # print(millis)
         # Animation obstacle
         for k in game.all_obstacles:
-            k.image = pygame.image.load('assets/obstacles/laser/' + millis[0] + '.png')
+            k.image = pygame.image.load('assets/obstacles/laser/' + millis[0] + '.png').convert_alpha()
             k.image = pygame.transform.rotate(k.image, k.rotation)
 
         # Animation drapeau arrivée
@@ -396,11 +401,13 @@ def niveau1():
                 screen.blit(obst.image, obst.rect)
             obst.move()
 
+        if fin.rect.x<=1100 and fin.rect.x>=-200:
+            screen.blit(fin.image, (fin.rect.x, fin.rect.y))
         fin.move()
-        screen.blit(fin.image, (fin.rect.x, fin.rect.y))
         # mise à jour de l'ecran
         pygame.display.flip()
         clock.tick(fps)
+        #print(clock.get_fps())
 
         #if game.check_collision(game.player, game.all_obstacles):
             #return False

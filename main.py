@@ -14,23 +14,23 @@ screen = pygame.display.set_mode((resize_x, resize_y))
 menu_music = pygame.mixer.Sound('assets/menu/enzo-aldasoro-phoenix-ghost-of-tsushima.mp3')
 
 # Fond d'écran
-background = pygame.image.load('assets/menu/NOIR.png')
+background = pygame.image.load('assets/menu/NOIR.png').convert_alpha()
 background = pygame.transform.scale(background, (resize_x, resize_y))
 
 # Fond d'écran lvl 1
-background_lvl_1 = pygame.image.load('assets/menu/Lvl 1.png')
+background_lvl_1 = pygame.image.load('assets/menu/Lvl 1.png').convert_alpha()
 background_lvl_1 = pygame.transform.scale(background_lvl_1, (resize_x, resize_y))
 
 # Fond d'écran lvl 2
-background_lvl_2 = pygame.image.load('assets/menu/Lvl 2.png')
+background_lvl_2 = pygame.image.load('assets/menu/Lvl 2.png').convert_alpha()
 background_lvl_2 = pygame.transform.scale(background_lvl_2, (resize_x, resize_y))
 
 # Fond d'écran lvl 3
-background_lvl_3 = pygame.image.load('assets/menu/Lvl 3.png')
+background_lvl_3 = pygame.image.load('assets/menu/Lvl 3.png').convert_alpha()
 background_lvl_3 = pygame.transform.scale(background_lvl_3, (resize_x, resize_y))
 
 # JETPY
-Jetpy_name = pygame.image.load('assets/menu/JETPY.png')
+Jetpy_name = pygame.image.load('assets/menu/JETPY.png').convert_alpha()
 Jetpy_name = pygame.transform.scale(Jetpy_name, (680, 140))
 Jetpy_name_rect = Jetpy_name.get_rect()
 Jetpy_name_rect.x = 210
@@ -38,42 +38,42 @@ Jetpy_name_rect.y = 75
 
 
 # Bouton Play
-play_button = pygame.image.load('assets/menu/PLAY.png')
+play_button = pygame.image.load('assets/menu/PLAY.png').convert_alpha()
 play_button = pygame.transform.scale(play_button, (323, 173))
 play_button_rect = play_button.get_rect()
 play_button_rect.x = 388
 play_button_rect.y = 325
 
 # Bouton 1
-Lvl1_button = pygame.image.load('assets/menu/LVL 1 button.png')
+Lvl1_button = pygame.image.load('assets/menu/LVL 1 button.png').convert_alpha()
 Lvl1_button = pygame.transform.scale(Lvl1_button, (215, 115))
 Lvl1_button_rect = Lvl1_button.get_rect()
 Lvl1_button_rect.x = 168
 Lvl1_button_rect.y = 425
 
 # Bouton 2
-Lvl2_button = pygame.image.load('assets/menu/LVL 2 button.png')
+Lvl2_button = pygame.image.load('assets/menu/LVL 2 button.png').convert_alpha()
 Lvl2_button = pygame.transform.scale(Lvl2_button, (215, 115))
 Lvl2_button_rect = Lvl2_button.get_rect()
 Lvl2_button_rect.x = 443
 Lvl2_button_rect.y = 425
 
 # Bouton 3
-Lvl3_button = pygame.image.load('assets/menu/LVL 3 button.png')
+Lvl3_button = pygame.image.load('assets/menu/LVL 3 button.png').convert_alpha()
 Lvl3_button = pygame.transform.scale(Lvl3_button, (215, 115))
 Lvl3_button_rect = Lvl3_button.get_rect()
 Lvl3_button_rect.x = 718
 Lvl3_button_rect.y = 425
 
 # Bouton Select
-Select_lvl_button = pygame.image.load('assets/menu/SELECT.png')
+Select_lvl_button = pygame.image.load('assets/menu/SELECT.png').convert_alpha()
 Select_lvl_button = pygame.transform.scale(Select_lvl_button, (300, 115))
 Select_lvl_button_rect = Select_lvl_button.get_rect()
 Select_lvl_button_rect.x = 400
 Select_lvl_button_rect.y = 275
 
 # Bouton crédits
-Credits_button = pygame.image.load('assets/menu/CREDITS.png')
+Credits_button = pygame.image.load('assets/menu/CREDITS.png').convert_alpha()
 Credits_button = pygame.transform.scale(Credits_button, (150, 58))
 Credits_button_rect = Credits_button.get_rect()
 Credits_button_rect.x = 940

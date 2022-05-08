@@ -28,7 +28,7 @@ class arrivee(pygame.sprite.Sprite):
         super().__init__()
         self.game=game
         self.velocity=4
-        self.image=pygame.image.load('assets/arrivee/0.png')
+        self.image=pygame.image.load('assets/arrivee/0.png').convert_alpha()
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y

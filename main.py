@@ -2,6 +2,7 @@ import pygame
 from game import Game
 from obstacles import *
 from niveau1 import *
+from niveau2 import *
 
 pygame.init()
 resize_x = 1100
@@ -102,7 +103,8 @@ while running:
         Lvl_1=False
 
     if Lvl_2:
-        screen.blit(background_lvl_2, (0, 0))
+        niveau2()
+        Lvl_2=False
     if Lvl_3:
         screen.blit(background_lvl_3, (0, 0))
     if Lvl_1 or Lvl_2 or Lvl_3:  # Si lancement d'un niveau

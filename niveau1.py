@@ -11,12 +11,20 @@ from pygame.locals import *
 def niveau1():
     # générer la fenetre de notre jeu
     pygame.display.set_caption("Jetpy")
-    flags = FULLSCREEN | DOUBLEBUF
-    screen = pygame.display.set_mode((1100, 600), flags)
+    flags = DOUBLEBUF
+    screen = pygame.display.set_mode((1100, 600))
     screen.set_alpha(None)
 
     resize_x = 1333
     resize_y = 1140
+
+    #IMAGES POUR L'ANIMATION
+    image_walk_1=pygame.image.load('assets/walk1.bmp')
+    image_walk_2=pygame.image.load('assets/walk2.bmp')
+    flying1=pygame.image.load('assets/flying.bmp')
+    flying2=pygame.image.load('assets/flying2.bmp')
+
+    image_laser = pygame.image.load('assets/obstacles/laser_grand.png').convert_alpha()
 
     # importer les différents plan du fond
     plan1 = pygame.image.load('assets/background/plan1.png').convert_alpha()
@@ -270,29 +278,30 @@ def niveau1():
         # millis[1] va prendre toutes les valeurs de 0 à 9 toutes les 0.01s
         # Et ainsi de suite
         millis = str((time.time())).split(".")[1]
-        # print(millis)
+        #print(millis)
         # Animation obstacle
         for k in game.all_obstacles:
-            k.image = pygame.image.load('assets/obstacles/laser/' + millis[0] + '.png').convert_alpha()
-            k.image = pygame.transform.rotate(k.image, k.rotation)
+            if k.rect.x <= 1100 and k.rect.x >= -200:
+                k.laser_animation(millis)
 
         # Animation drapeau arrivée
-        if (not int(millis[0]) % 2):
-            fin.image = pygame.image.load('assets/arrivee/' + millis[0] + '.png').convert_alpha()
+        if fin.rect.x <= 1100 and fin.rect.x >= -200:
+            if (not int(millis[0]) % 2):
+                fin.image = pygame.image.load('assets/arrivee/' + millis[0] + '.png')
         # Animation player
         # Au sol
         if (game.player.rect.y == 514):
             if (0 <= int(millis[0]) * 10 + int(millis[1]) < 25 or 50 <= int(millis[0]) * 10 + int(millis[1]) < 75):
-                game.player.image = pygame.image.load('assets/walk1.bmp').convert_alpha()
+                game.player.image = image_walk_1
             else:
-                game.player.image = pygame.image.load('assets/walk2.bmp').convert_alpha()
+                game.player.image = image_walk_2
         # En vol
         else:
-            # Si space pressed
+            # Si barre espace pressée
             if (game.pressed.get(pygame.K_SPACE)):
-                game.player.image = pygame.image.load('assets/flying.bmp').convert_alpha()
+                game.player.image = flying1
             else:
-                game.player.image = pygame.image.load('assets/flying2.bmp').convert_alpha()
+                game.player.image = flying2
 
         # si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0
         if up == False and game.pressed.get(pygame.K_SPACE):
@@ -404,13 +413,9 @@ def niveau1():
         if fin.rect.x<=1100 and fin.rect.x>=-200:
             screen.blit(fin.image, (fin.rect.x, fin.rect.y))
         fin.move()
-        # mise à jour de l'ecran
-        pygame.display.flip()
-        clock.tick(fps)
-        #print(clock.get_fps())
 
-        #if game.check_collision(game.player, game.all_obstacles):
-            #return False
+        if game.check_collision(game.player, game.all_obstacles):
+            return False
 
         if game.check_collision(game.player, game.all_finish):
             return True
@@ -426,3 +431,8 @@ def niveau1():
                 game.pressed[event.key] = True
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
+
+        # mise à jour de l'ecran
+        pygame.display.flip()
+        clock.tick(fps)
+        print(clock.get_fps())

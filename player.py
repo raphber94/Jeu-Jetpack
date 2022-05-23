@@ -5,7 +5,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.velocity_x=5
-        self.velocity_y=5
+        self.velocity_y=4
         self.image=pygame.image.load('assets/walk1.bmp').convert_alpha()
         self.rect=self.image.get_rect()
         self.rect.x=200

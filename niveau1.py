@@ -4,11 +4,18 @@ from obstacles import *
 from niveau1 import *
 import time
 from pygame.locals import *
+from pygame import mixer
+from sound import Sound
 #import psyco
 #psyco.full()
 
 
 def niveau1():
+    # charger le jeu
+    game = Game()
+
+    pygame.mixer.music.load('sons/background.wav')
+    pygame.mixer.music.play()
     # générer la fenetre de notre jeu
     pygame.display.set_caption("Jetpy")
     flags = DOUBLEBUF
@@ -50,9 +57,6 @@ def niveau1():
 
     planlight = pygame.image.load('assets/background/planlight.png').convert_alpha()
     planlight = pygame.transform.scale(planlight, (resize_x, resize_y))
-
-    # charger le jeu
-    game = Game()
 
     running = True
     # obstacles
@@ -278,7 +282,6 @@ def niveau1():
         # millis[1] va prendre toutes les valeurs de 0 à 9 toutes les 0.01s
         # Et ainsi de suite
         millis = str((time.time())).split(".")[1]
-        #print(millis)
         # Animation obstacle
         for k in game.all_obstacles:
             if k.rect.x <= 1100 and k.rect.x >= -200:
@@ -303,22 +306,36 @@ def niveau1():
             else:
                 game.player.image = flying2
 
+
+        #Bruit jetpack
+        if game.pressed.get(pygame.K_SPACE):
+            game.music.jetpackclassique_sound.play()
+        else:
+            game.music.jetpackclassique_sound.stop()
+
+
         # si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0
-        if up == False and game.pressed.get(pygame.K_SPACE):
-            time_up = 0
-
-        if up == True and game.pressed.get(pygame.K_SPACE) == False:
-            time_down = 0
-
         if game.pressed.get(pygame.K_SPACE):
             up = True
-            time_up += 1
-            v0_down = game.player.move_up(time_up, v0_up)
+            if game.player.rect.y == 2:
+                time_up = 1
+            else:
+                time_up += 1
+            if (time_down > 0):
+                time_down -= 1
         else:
-            up = False
             if game.player.rect.y < 514:
                 time_down += 1
-                v0_up = game.player.fall(time_down, v0_down)
+            else:
+                time_down = 1
+            if (time_up > 0):
+                time_up -= 1
+            up = False
+
+        v0_down = game.player.move_up(time_up, v0_up)
+
+        if game.player.rect.y < 514:
+            v0_up = game.player.fall(time_down, v0_down)
 
         # avec la chute libre, le joueur sort parfois de l'écran donc on le remet dans le cadre
         if game.player.rect.y > 514:
@@ -415,9 +432,13 @@ def niveau1():
         fin.move()
 
         if game.check_collision(game.player, game.all_obstacles):
+            pygame.mixer.music.stop()
+            game.music.elec_sound.play()
+
             return False
 
         if game.check_collision(game.player, game.all_finish):
+            pygame.mixer.stop()
             return True
 
         # si le joueur ferme cette fenêtre
@@ -435,4 +456,4 @@ def niveau1():
         # mise à jour de l'ecran
         pygame.display.flip()
         clock.tick(fps)
-        print(clock.get_fps())
+        #print(clock.get_fps())

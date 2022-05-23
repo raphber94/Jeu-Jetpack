@@ -49,22 +49,16 @@ play_button_rect.y = 325
 Lvl1_button = pygame.image.load('assets/menu/LVL 1 button.png').convert_alpha()
 Lvl1_button = pygame.transform.scale(Lvl1_button, (215, 115))
 Lvl1_button_rect = Lvl1_button.get_rect()
-Lvl1_button_rect.x = 168
+Lvl1_button_rect.x = 268
 Lvl1_button_rect.y = 425
 
 # Bouton 2
 Lvl2_button = pygame.image.load('assets/menu/LVL 2 button.png').convert_alpha()
 Lvl2_button = pygame.transform.scale(Lvl2_button, (215, 115))
 Lvl2_button_rect = Lvl2_button.get_rect()
-Lvl2_button_rect.x = 443
+Lvl2_button_rect.x = 575
 Lvl2_button_rect.y = 425
 
-# Bouton 3
-Lvl3_button = pygame.image.load('assets/menu/LVL 3 button.png').convert_alpha()
-Lvl3_button = pygame.transform.scale(Lvl3_button, (215, 115))
-Lvl3_button_rect = Lvl3_button.get_rect()
-Lvl3_button_rect.x = 718
-Lvl3_button_rect.y = 425
 
 # Bouton Select
 Select_lvl_button = pygame.image.load('assets/menu/SELECT.png').convert_alpha()
@@ -102,13 +96,16 @@ while running:
         pygame.mixer.stop()
         niveau1()
         Lvl_1=False
+        menu_music.play(1000)
 
     if Lvl_2:
         pygame.mixer.stop()
         niveau2()
         Lvl_2=False
+        menu_music.play(1000)
     if Lvl_3:
         screen.blit(background_lvl_3, (0, 0))
+
     if Lvl_1 or Lvl_2 or Lvl_3:  # Si lancement d'un niveau
         menu_music.fadeout(1000)
         Choose_lvl = False
@@ -122,7 +119,6 @@ while running:
         screen.blit(Select_lvl_button, (Select_lvl_button_rect.x, Select_lvl_button_rect.y))
         screen.blit(Lvl1_button, (Lvl1_button_rect.x, Lvl1_button_rect.y))
         screen.blit(Lvl2_button, (Lvl2_button_rect.x, Lvl2_button_rect.y))
-        screen.blit(Lvl3_button, (Lvl3_button_rect.x, Lvl3_button_rect.y))
         screen.blit(Credits_button, (Credits_button_rect.x, Credits_button_rect.y))
 
     if Credit:
@@ -148,10 +144,6 @@ while running:
             elif Choose_lvl and Lvl2_button_rect.collidepoint(event.pos):  # Si on clic sur "2"
                 Lvl_2 = True
                 # Lancer lvl 2
-
-            elif Choose_lvl and Lvl3_button_rect.collidepoint(event.pos):  # Si on clic sur "3"
-                Lvl_3 = True
-                # Lancer lvl 3
 
             elif Choose_lvl and Credits_button_rect.collidepoint(event.pos):  # Si on clic sur "CREDITS"
                 Credit = True

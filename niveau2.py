@@ -8,6 +8,12 @@ from pygame.locals import *
 
 
 def niveau2():
+    # charger le jeu
+    game = Game()
+
+    pygame.mixer.music.load('sons/musique2.mp3')
+    pygame.mixer.music.play()
+    OOF = pygame.mixer.Sound('sons/OOF.mp3')
     # générer la fenetre de notre jeu
     pygame.display.set_caption("Jetpy")
     flags = DOUBLEBUF
@@ -23,9 +29,6 @@ def niveau2():
     v0_up = 0
     v0_down = 0
     up = False
-
-    # charger le jeu
-    game = Game()
 
     # IMAGES POUR L'ANIMATION
     image_walk_1 = pygame.image.load('assets/walk1.bmp')
@@ -54,6 +57,7 @@ def niveau2():
     game.all_obstacles.add(feu1)
     game.all_obstacles.add(feu2)
 
+    game.player.rect.y=435
     game.player.rect.y=435
     running=True
     # boucle tant que le jeu est lancé
@@ -91,21 +95,27 @@ def niveau2():
                 game.player.image = flying2
 
         # si le joueur rappuie sur espace alors qu'il n'appuyait pas avant on remet le temps de montée à 0
-        if up == False and game.pressed.get(pygame.K_SPACE):
-            time_up = 0
-
-        if up == True and game.pressed.get(pygame.K_SPACE) == False:
-            time_down = 0
-
         if game.pressed.get(pygame.K_SPACE):
             up = True
-            time_up += 1
-            v0_down = game.player.move_up(time_up, v0_up)
+            if game.player.rect.y == 2:
+                time_up = 1
+            else:
+                time_up += 1
+            if (time_down > 0):
+                time_down -= 1
         else:
-            up = False
             if game.player.rect.y < 435:
                 time_down += 1
-                v0_up = game.player.fall(time_down, v0_down)
+            else:
+                time_down = 1
+            if (time_up > 0):
+                time_up -= 1
+            up = False
+
+        v0_down = game.player.move_up(time_up, v0_up)
+
+        if game.player.rect.y < 435:
+            v0_up = game.player.fall(time_down, v0_down)
 
         # avec la chute libre, le joueur sort parfois de l'écran donc on le remet dans le cadre
         if game.player.rect.y >435:
@@ -172,9 +182,12 @@ def niveau2():
 
 
         if game.check_collision(game.player, game.all_obstacles):
+            OOF.play()
+            pygame.mixer.music.stop()
             return False
 
         if game.check_collision(game.player, game.all_finish):
+            pygame.mixer.music.stop()
             return True
 
         # si le joueur ferme cette fenêtre

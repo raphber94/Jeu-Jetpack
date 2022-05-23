@@ -99,10 +99,12 @@ while running:
 
     # Lancement des différents niveaux
     if Lvl_1:
+        pygame.mixer.stop()
         niveau1()
         Lvl_1=False
 
     if Lvl_2:
+        pygame.mixer.stop()
         niveau2()
         Lvl_2=False
     if Lvl_3:

@@ -1,7 +1,6 @@
 import pygame
 from game import Game
 from obstacles import *
-from niveau1 import *
 import time
 from pygame.locals import *
 #import psyco
@@ -34,6 +33,8 @@ def niveau2():
     flying1 = pygame.image.load('assets/flying.bmp')
     flying2 = pygame.image.load('assets/flying2.bmp')
 
+
+
     #Images pour le fond
     plan5=pygame.image.load('assets/fond grotte/1_1.png').convert_alpha()
     plan4=pygame.image.load('assets/fond grotte/1_2.png').convert_alpha()
@@ -41,6 +42,19 @@ def niveau2():
     plan2=pygame.image.load('assets/fond grotte/1_4.png').convert_alpha()
     plan1=pygame.image.load('assets/fond grotte/1_5.png').convert_alpha()
 
+    plan5_x=0
+    plan4_x=0
+    plan3_x=0
+    plan2_x=0
+    plan1_x=0
+
+    #OBSTACLES
+    feu1=obstacle(game,715,300,"fire",0)
+    feu2 = obstacle(game, 900, 0, "fire", 180)
+    game.all_obstacles.add(feu1)
+    game.all_obstacles.add(feu2)
+
+    game.player.rect.y=435
     running=True
     # boucle tant que le jeu est lancé
     while running:
@@ -55,12 +69,15 @@ def niveau2():
         millis = str((time.time())).split(".")[1]
         #print(millis)
         # Animation obstacle
+        for k in game.all_obstacles:
+            if k.rect.x <= 1100 and k.rect.x >= -200:
+                k.fire_animation(millis)
 
         # Animation drapeau arrivée
 
         # Animation player
         # Au sol
-        if (game.player.rect.y == 514):
+        if (game.player.rect.y == 435):
             if (0 <= int(millis[0]) * 10 + int(millis[1]) < 25 or 50 <= int(millis[0]) * 10 + int(millis[1]) < 75):
                 game.player.image = image_walk_1
             else:
@@ -86,22 +103,65 @@ def niveau2():
             v0_down = game.player.move_up(time_up, v0_up)
         else:
             up = False
-            if game.player.rect.y < 514:
+            if game.player.rect.y < 435:
                 time_down += 1
                 v0_up = game.player.fall(time_down, v0_down)
 
         # avec la chute libre, le joueur sort parfois de l'écran donc on le remet dans le cadre
-        if game.player.rect.y > 514:
-            game.player.rect.y = 514
+        if game.player.rect.y >435:
+            game.player.rect.y = 435
+
+        #vitesses des plans
+        plan5_x -= 1 * 2
+        plan4_x -= 1.3 * 2
+        plan3_x -= 1.5 * 2
+        plan2_x -= 1.7 * 2
+        plan1_x -= 2 * 2
 
         # appliquer arriere plan en le répétant à l'infini avec des vitesses différentes en fonction du premier plan, deuxième,...
-        screen.blit(plan5, (0, 0))
-        screen.blit(plan4, (0, 0))
-        screen.blit(plan3, (0, 0))
-        screen.blit(plan2, (0, 0))
-        screen.blit(plan1, (0, 0))
+        # Pour tous les éléments du cinquième plan:
+        if plan5_x > -1490:
+            screen.blit(plan5, (plan5_x, 0))
+            screen.blit(plan5, (plan5_x + 1490, 0))
+        else:
+            plan5_x = 0
+            screen.blit(plan5, (plan5_x, 0))
+
+        # Pour tous les éléments du quatrième plan:
+        if plan4_x > -1490:
+            screen.blit(plan4, (plan4_x, 0))
+            screen.blit(plan4, (plan4_x + 1490, 0))
+        else:
+            plan4_x = 0
+            screen.blit(plan4, (plan4_x, 0))
+
+        # Pour tous les éléments du troisième plan:
+        if plan3_x > -1490:
+            screen.blit(plan3, (plan3_x, 0))
+            screen.blit(plan3, (plan3_x + 1490, 0))
+        else:
+            plan3_x = 0
+            screen.blit(plan3, (plan3_x, 0))
+
+        # Pour tous les éléments du second plan:
+        if plan2_x > -1490:
+            screen.blit(plan2, (plan2_x, 0))
+            screen.blit(plan2, (plan2_x + 1490, 0))
+        else:
+            plan2_x = 0
+            screen.blit(plan2, (plan2_x, 0))
+
         # appliquer l'image du joueur
         screen.blit(game.player.image, game.player.rect)
+
+        # Pour tous les éléments du premier plan:
+        if plan1_x > -1490:
+            screen.blit(plan1, (plan1_x, 0))
+            screen.blit(plan1, (plan1_x + 1490, 0))
+        else:
+            plan1_x = 0
+            screen.blit(plan1, (plan1_x, 0))
+
 
 
         # On affiche les obstacles et on les fait avancer

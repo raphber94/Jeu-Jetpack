@@ -35,9 +35,11 @@ def niveau2():
     flying2 = pygame.image.load('assets/flying2.bmp')
 
     #Images pour le fond
-    plan3=pygame.image.load('assets/fond_vert/back.png')
-    plan2=pygame.image.load('assets/fond_vert/middle.png')
-    plan1=pygame.image.load('assets/fond_vert/near.png')
+    plan5=pygame.image.load('assets/fond grotte/1_1.png').convert_alpha()
+    plan4=pygame.image.load('assets/fond grotte/1_2.png').convert_alpha()
+    plan3=pygame.image.load('assets/fond grotte/1_3.png').convert_alpha()
+    plan2=pygame.image.load('assets/fond grotte/1_4.png').convert_alpha()
+    plan1=pygame.image.load('assets/fond grotte/1_5.png').convert_alpha()
 
     running=True
     # boucle tant que le jeu est lancé
@@ -93,6 +95,8 @@ def niveau2():
             game.player.rect.y = 514
 
         # appliquer arriere plan en le répétant à l'infini avec des vitesses différentes en fonction du premier plan, deuxième,...
+        screen.blit(plan5, (0, 0))
+        screen.blit(plan4, (0, 0))
         screen.blit(plan3, (0, 0))
         screen.blit(plan2, (0, 0))
         screen.blit(plan1, (0, 0))

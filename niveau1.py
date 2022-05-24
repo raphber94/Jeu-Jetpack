@@ -267,6 +267,7 @@ def niveau1():
 
     # arrivée
     fin = arrivee(game, 10700, 200)
+    fin.velocity=1.7 * 2
     game.all_finish.add(fin)
 
     up = False
@@ -456,4 +457,4 @@ def niveau1():
         # mise à jour de l'ecran
         pygame.display.flip()
         clock.tick(fps)
-        #print(clock.get_fps())
+        print(clock.get_fps())

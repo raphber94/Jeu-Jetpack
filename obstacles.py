@@ -19,13 +19,15 @@ class obstacle(pygame.sprite.Sprite):
         self.rotation = rotation
         if type=="fire":
             self.image=image_fire
+            self.velocity = 4
         elif type=="laser":
             self.image = image_laser
+            self.velocity = 4
         self.image = pygame.transform.rotate(self.image, rotation)
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
-        self.velocity=4
+
 
     def move(self):
         #if not self.game.check_collision(self,self.game.all_players):

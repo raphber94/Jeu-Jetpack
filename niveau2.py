@@ -52,11 +52,64 @@ def niveau2():
     plan1_x=0
 
     #OBSTACLES
-    feu1=obstacle(game,715,300,"fire",0)
-    feu2 = obstacle(game, 900, 0, "fire", 180)
+    feu1 = obstacle(game, 750, 300, "fire", 0)
+    feu2 = obstacle(game, 1000, 0, "fire", 180)
+    feu3 = obstacle(game, 1300, 0, "fire", 180)
+    feu4 = obstacle(game, 1600, 300, "fire", 0)
+    feu5 = obstacle(game, 1900, 0, "fire", 180)
+    feu6 = obstacle(game, 2000, 0, "fire", 180)
+    feu7 = obstacle(game, 2100, 0, "fire", 180)
+    feu8 = obstacle(game, 2350, 300, "fire", 0)
+    feu9 = obstacle(game, 2450, 300, "fire", 0)
+    feu10 = obstacle(game, 2600, 0, "fire", 180)
+    feu11 = obstacle(game, 2800, 400, "fire", 0)
+    feu12 = obstacle(game, 3000, 160, "fire", 90)
+    feu13 = obstacle(game, 3300, 150, "fire", 270)
+    feu14 = obstacle(game, 3300, 405, "fire", 90)
+    feu15 = obstacle(game, 3600, 400, "fire", 270)
+    feu16 = obstacle(game, 3700, -150, "fire", 180)
+    feu17 = obstacle(game, 3800, 230, "fire", 90)
+    feu18 = obstacle(game, 4100, 230, "fire", 270)
+    feu19 = obstacle(game, 4400, 450, "fire", 0)
+    feu20 = obstacle(game, 4400, -150, "fire", 180)
+    feu21 = obstacle(game, 4600, -75, "fire", 180)
+    feu22 = obstacle(game, 4600, 375, "fire", 0)
+    feu23 = obstacle(game, 4900, 250, "fire", 135)
+    feu24 = obstacle(game, 5100, 50, "fire", 315)
+    feu25 = obstacle(game, 5400, 230, "fire", 90)
+    feu26 = obstacle(game, 5700, 230, "fire", 270)
+    feu27 = obstacle(game, 6200, 300, "fire", 0)
+
     game.all_obstacles.add(feu1)
     game.all_obstacles.add(feu2)
+    game.all_obstacles.add(feu3)
+    game.all_obstacles.add(feu4)
+    game.all_obstacles.add(feu5)
+    game.all_obstacles.add(feu6)
+    game.all_obstacles.add(feu7)
+    game.all_obstacles.add(feu8)
+    game.all_obstacles.add(feu9)
+    game.all_obstacles.add(feu10)
+    game.all_obstacles.add(feu11)
+    game.all_obstacles.add(feu12)
+    game.all_obstacles.add(feu13)
+    game.all_obstacles.add(feu14)
+    game.all_obstacles.add(feu15)
+    game.all_obstacles.add(feu16)
+    game.all_obstacles.add(feu17)
+    game.all_obstacles.add(feu18)
+    game.all_obstacles.add(feu19)
+    game.all_obstacles.add(feu20)
+    game.all_obstacles.add(feu21)
+    game.all_obstacles.add(feu22)
+    game.all_obstacles.add(feu23)
+    game.all_obstacles.add(feu24)
+    game.all_obstacles.add(feu25)
+    game.all_obstacles.add(feu26)
+    game.all_obstacles.add(feu27)
 
+    fin=arrivee(game,6210,100)
+    game.all_finish.add(fin)
     game.player.rect.y=435
     game.player.rect.y=435
     running=True
@@ -74,11 +127,13 @@ def niveau2():
         #print(millis)
         # Animation obstacle
         for k in game.all_obstacles:
-            if k.rect.x <= 1100 and k.rect.x >= -200:
+            if k.rect.x <= 1100 and k.rect.x >= -600:
                 k.fire_animation(millis)
 
         # Animation drapeau arrivée
-
+        if fin.rect.x <= 1100 and fin.rect.x >= -600:
+            if (not int(millis[0]) % 2):
+                        fin.image = pygame.image.load('assets/arrivee/' + millis[0] + '.png')
         # Animation player
         # Au sol
         if (game.player.rect.y == 435):
@@ -164,6 +219,16 @@ def niveau2():
         # appliquer l'image du joueur
         screen.blit(game.player.image, game.player.rect)
 
+        # On affiche les obstacles et on les fait avancer
+        for obst in game.all_obstacles:
+            if obst.rect.x <= 1100 and obst.rect.x >= -600:
+                screen.blit(obst.image, obst.rect)
+            obst.move()
+
+        if fin.rect.x<=1100 and fin.rect.x>=-600:
+            screen.blit(fin.image, (fin.rect.x, fin.rect.y))
+        fin.move()
+
         # Pour tous les éléments du premier plan:
         if plan1_x > -1490:
             screen.blit(plan1, (plan1_x, 0))
@@ -171,15 +236,6 @@ def niveau2():
         else:
             plan1_x = 0
             screen.blit(plan1, (plan1_x, 0))
-
-
-
-        # On affiche les obstacles et on les fait avancer
-        for obst in game.all_obstacles:
-            if obst.rect.x <= 1100 and obst.rect.x >= -200:
-                screen.blit(obst.image, obst.rect)
-            obst.move()
-
 
         if game.check_collision(game.player, game.all_obstacles):
             OOF.play()
